@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Yo it's a brand new day!
+          Yo it's a brand new day, let's get to work!
         </a>
       </header>
     </div>
