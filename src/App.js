@@ -1,43 +1,27 @@
-import Category from "./components/category/category.component";
+import { Routes, Route } from 'react-router-dom';
 
-const categories = [
-  {
-    "id": 1,
-    "title": "hats",
-    "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
-  },
-  {
-    "id": 2,
-    "title": "jackets",
-    "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png"
-  },
-  {
-    "id": 3,
-    "title": "sneakers",
-    "imageUrl": "https://i.ibb.co/0jqHpnp/sneakers.png"
-  },
-  {
-    "id": 4,
-    "title": "womens",
-    "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png"
-  },
-  {
-    "id": 5,
-    "title": "mens",
-    "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
-  }
-]
+import Home from "./routes/home/home.components";
+import Navigation from './routes/navigation/navigation.component';
 
+const Shop = () => {
+  return (
+    <h1>
+      I am the SHOP component!
+    </h1>
+  )
+};
 
 const App = () => {
   return (
-    <Category categories={categories} />
+    <div>
+      <Routes>
+        <Route path="" element={<Navigation />}>
+          <Route index element={<Home />} />
+          <Route path="shop" element={<Shop />} />
+        </Route>
+      </Routes>
+    </div>
   )
 };
 
 export default App;
-
-// todo: how to push existing project to github
-// todo: what is remote origin
-// todo: default branching
-// todo: add fonts
