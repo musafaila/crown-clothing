@@ -12,12 +12,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
-<<<<<<< HEAD
     "sass": "^1.63.3",
     "sass-loader": "^13.3.2",
-=======
-    "sass": "^1.63.2",
->>>>>>> 8b49e5cfba61aaae5011b8095e87ecde6dc52fad
     "web-vitals": "^2.1.4"
   },
   "scripts": {
