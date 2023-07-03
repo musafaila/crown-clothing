@@ -13,10 +13,11 @@ export const UserContextProvider = ({ children }) => {
   const value = { currentUser, setCurrentUser };
 
   useEffect(() => {
-    AuthStateListener((user) => {
+    const unsubscribe = AuthStateListener((user) => {
       console.log(user);
       setCurrentUser(user);
     })
+    return unsubscribe();
   }, []);
 
   return <userContext.Provider value={value}>{children}</userContext.Provider>;
