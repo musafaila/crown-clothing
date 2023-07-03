@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 import "./sign-in-form.styles.scss";
 
@@ -11,7 +11,6 @@ import {
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-import { userContext } from "../../contexts/user.context";
 
 const defaultFormFields = {
   email: "",
@@ -22,13 +21,11 @@ const SignInForm = () => {
   const [formFields, setformFields] = useState(defaultFormFields);
   // console.log(formFields);
 
-  const { setCurrentUser } = useContext(userContext);
 
   // sign in with google
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
-    // save the current auth user in the userContext
-    setCurrentUser(user);
+   
     await createUserDocumentFromAuth(user);
   };
 
@@ -54,12 +51,8 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      // save the current auth user in the userContext
-      setCurrentUser(user);
+      await signInAuthUserWithEmailAndPassword(email, password);
+
       // reset form fields after signing in the user
       resetFormfields();
     } catch (error) {
@@ -71,7 +64,7 @@ const SignInForm = () => {
           alert("Unable to connect, check your network and try again!");
           break;
         case "auth/user-not-found":
-          alert("No user associated with this email!")
+          alert("No user associated with this email!");
           break;
         default:
           console.log(error);
