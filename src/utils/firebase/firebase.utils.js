@@ -6,6 +6,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -24,17 +26,17 @@ initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore();
 
-// create goggle auth provider.
+// create google auth provider.
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-// sign in with google popup function
+// FUNCTION TO SIG IN USER WITH GOOGLE (POPUP)
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
-// create auth user with email and password function
+// FUNCTION TO CREATE AUTH USER WITH EMAIL AND PASSWORD
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) {
     return;
@@ -43,7 +45,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   return authUSer;
 };
 
-// create and save user document in firestore
+// FUNCTION TO CREATE AND SAVE USER DOCUMENT IN FIRESTORE DB
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalInfo = {}
@@ -68,10 +70,20 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 };
 
-// sign in with email and password function
+// FUNCTION TO SIGN IN USER WITH EMAIL AND PASSWORD
 export const signInAuthUserWithEmailAndPassword = (email, password) => {
   if (!email || !password) {
     return;
   }
   return signInWithEmailAndPassword(auth, email, password);
 };
+
+// FUNTION TO SIGN OUT USER
+export const signOutAuthUser = async () => {
+  await signOut(auth);
+}
+
+// FUNCTION TO HANDLE AUTH STATE CHANGES USING LISTENERS.
+export const AuthStateListener = (callback) => {
+  onAuthStateChanged(auth,callback);
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "./sign-in-form.styles.scss"
+import "./sign-in-form.styles.scss";
 
 import {
   signInWithGooglePopup,
@@ -11,6 +11,7 @@ import {
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
+
 const defaultFormFields = {
   email: "",
   password: "",
@@ -20,9 +21,11 @@ const SignInForm = () => {
   const [formFields, setformFields] = useState(defaultFormFields);
   // console.log(formFields);
 
-  // sign in with google  
+
+  // sign in with google
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
+   
     await createUserDocumentFromAuth(user);
   };
 
@@ -48,16 +51,24 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      console.log(user);
+      await signInAuthUserWithEmailAndPassword(email, password);
 
       // reset form fields after signing in the user
       resetFormfields();
     } catch (error) {
-      console.log(error);
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("Worng password!");
+          break;
+        case "auth/network-request-failed":
+          alert("Unable to connect, check your network and try again!");
+          break;
+        case "auth/user-not-found":
+          alert("No user associated with this email!");
+          break;
+        default:
+          console.log(error);
+      }
     }
   };
 
