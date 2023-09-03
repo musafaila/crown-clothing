@@ -6,7 +6,7 @@ import { ReactComponent as CartSvgIcon } from "../../../assets/shopping-bag.svg"
 import { CartContext } from "../../../contexts/cart.context";
 
 const CartIcon = () => {
-  const { isCartOpened, setIscartOpened } = useContext(CartContext);
+  const { isCartOpened, setIscartOpened, itemsCount } = useContext(CartContext);
 
   const toggleCartDropdown = () => {
     setIscartOpened(!isCartOpened);
@@ -15,7 +15,7 @@ const CartIcon = () => {
   return (
     <div className="cart-icon-container" onClick={toggleCartDropdown}>
       <CartSvgIcon className="shopping-icon" />
-      <span className="item-count">0</span>
+      <span className="item-count">{itemsCount}</span>
     </div>
   );
 };
