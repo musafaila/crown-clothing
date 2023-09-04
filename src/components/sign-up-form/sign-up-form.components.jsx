@@ -109,7 +109,7 @@ const SignUpForm = () => {
           required
         />
 
-        <Button type="submit" children="Sign Up" />
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );

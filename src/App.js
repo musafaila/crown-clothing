@@ -1,17 +1,11 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
+// IMPORTING ROUTES HERE
 import Home from "./routes/home/home.components";
-import Navigation from './routes/navigation/navigation.component';
+import Navigation from "./routes/navigation/navigation.component";
 import Authentication from "./routes/authentication/auth.component";
-
-
-const Shop = () => {
-  return (
-    <h1>
-      I am the SHOP component!
-    </h1>
-  )
-};
+import Shop from "./routes/shop/shop.components";
+import CheckOut from "./components/checkout/checkout.component";
 
 const App = () => {
   return (
@@ -20,11 +14,12 @@ const App = () => {
         <Route path="" element={<Navigation />}>
           <Route index element={<Home />} />
           <Route path="shop" element={<Shop />} />
-          <Route path='auth' element={ <Authentication/>} />
+          <Route path="auth" element={<Authentication />} />
+          <Route path="checkout" element={<CheckOut />} />
         </Route>
       </Routes>
     </div>
-  )
+  );
 };
 
 export default App;

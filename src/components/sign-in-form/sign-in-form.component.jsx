@@ -11,7 +11,6 @@ import {
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-
 const defaultFormFields = {
   email: "",
   password: "",
@@ -21,11 +20,10 @@ const SignInForm = () => {
   const [formFields, setformFields] = useState(defaultFormFields);
   // console.log(formFields);
 
-
   // sign in with google
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
-   
+
     await createUserDocumentFromAuth(user);
   };
 
@@ -97,13 +95,11 @@ const SignInForm = () => {
         />
 
         <div className="btn-container">
-          <Button children="Sign In" type="submit" />
-          <Button
-            children="Sign In with Google"
-            type="button"
-            onClick={signInWithGoogle}
-            buttonType="google"
-          />
+          <Button type="submit">Sign In</Button>
+
+          <Button type="button" onClick={signInWithGoogle} buttonType="google">
+            Sign In with Google
+          </Button>
         </div>
       </form>
     </div>
